@@ -11,26 +11,39 @@ async function getExchangeRate(baseCurrency, targetCurrency) {
   const url = `https://v6.exchangerate-api.com/v6/${apiKey}/pair/${baseCurrency}/${targetCurrency}`;
 
   try {
-    const exchangeRatesData = sessionStorage.getItem('exchangeRates');
+    let exchangeRatesData = sessionStorage.getItem('exchangeRates');
+    let exchangeRates = {};
+
     if (exchangeRatesData) {
-      const exchangeRates = JSON.parse(exchangeRatesData);
+      try {
+        exchangeRates = JSON.parse(exchangeRatesData);
+      } catch (error) {
+        throw new Error('Invalid exchange rates data');
+      }
+    }
+
+    const amount = 55;
+
+    if (exchangeRates && exchangeRates[targetCurrency]) {
       const exchangeRate = exchangeRates[targetCurrency];
-      const displayText = `1 ${baseCurrency} = ${exchangeRate} ${targetCurrency}`;
+      const displayText = `${amount} ${baseCurrency} = ${exchangeRate} ${targetCurrency}`;
       updateDisplay(displayText);
     } else {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Failed to exchange rates');
+        throw new Error('Failed');
       }
       const data = await response.json();
       if (data.result === 'success') {
-        const rates = data.conversion_rates;
-
-        sessionStorage.setItem('exchangeRates', JSON.stringify(rates));
-
-        const exchangeRate = rates[targetCurrency];
-        const displayText = `1 ${baseCurrency} = ${exchangeRate} ${targetCurrency}`;
-        updateDisplay(displayText);
+        exchangeRates = data.conversion_rates;
+        sessionStorage.setItem('exchangeRates', JSON.stringify(exchangeRates));
+        const exchangeRate = exchangeRates[targetCurrency];
+        if (exchangeRate) {
+          const displayText = `${amount} ${baseCurrency} = ${exchangeRate} ${targetCurrency}`;
+          updateDisplay(displayText);
+        } else {
+          throw new Error('Invalid Exchange Rate');
+        }
       } else {
         throw new Error('No Results Found');
       }
