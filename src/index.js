@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import './css/styles.css';
 import Currency from './currency.js';
 
@@ -5,30 +7,32 @@ function updateDisplay(displayText) {
   document.getElementById('display_title').textContent = displayText;
 }
 
-async function getCurrency(currency) {
+async function getCurrency(baseCurrency, currency) {
   try {
-    const apiKey = process.env.API_KEY;
-    const response = await Currency.getCurrency(apiKey);
+    const response = await Currency.getCurrency(baseCurrency);
     const rates = response.conversion_rates;
+
     if (Object.prototype.hasOwnProperty.call(rates, currency)) {
       const exchangeRate = rates[currency];
-      const displayText = `1 USD = ${exchangeRate} ${currency}`;
+      const displayText = `1 ${baseCurrency} = ${exchangeRate} ${currency}`;
       updateDisplay(displayText);
     } else {
       updateDisplay('Invalid Currency');
     }
   } catch (error) {
-    updateDisplay('Error getting currency');
+    updateDisplay('Error Getting Currency');
   }
 }
 
 document.querySelector('form').addEventListener('submit', function (event) {
   event.preventDefault();
+  const baseCurrency = 'USD';
   const currencyInput = document.getElementById('currency');
   const currency = currencyInput.value;
-  getCurrency(currency);
+  getCurrency(baseCurrency, currency);
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  getCurrency('USD');
+  const baseCurrency = 'USD';
+  getCurrency(baseCurrency, 'USD');
 });
