@@ -9,8 +9,12 @@
 
 <body>
   <form>
-    <input id="currency" type="text" placeholder="USD">
-    <button type="submit">Submit</button>
+    <input type="number" id="amount" placeholder="Enter Amount" required>
+    <select id="currency">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+    </select>
+    <button type="submit">Convert Currency</button>
   </form>
   <div id="showResponse"></div>
   <p id="display_title"></p>

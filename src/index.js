@@ -1,32 +1,57 @@
-require('dotenv').config();
-
 import './css/styles.css';
-import Currency from './currency.js';
 
-function updateDisplay(displayText,) {
-  const displayTitle = document.getElementById('display_title');
-  displayTitle.textContent = displayText;
+function updateDisplay(displayText) {
+  document.getElementById('display_title').textContent = displayText;
 }
 
-async function getCurrency(baseCurrency, currency) {
-  const response = await Currency.getCurrency(baseCurrency);
-  const rates = response.conversion_rates;
-  if (currency === baseCurrency) {
-    updateDisplay('Error Getting Currency');
-  } else if (Object.prototype.hasOwnProperty.call(rates, currency)) {
-    const exchangeRate = rates[currency];
-    const displayText = `1 ${baseCurrency} = ${exchangeRate} ${currency}`;
-    updateDisplay(displayText);
-  } else {
-    updateDisplay('Invalid Currency');
+const baseCurrency = 'USD';
+
+async function getExchangeRate(baseCurrency, targetCurrency) {
+  const apiKey = process.env.API_KEY;
+  const url = `https://v6.exchangerate-api.com/v6/${apiKey}/pair/${baseCurrency}/${targetCurrency}`;
+
+  try {
+    const exchangeRatesData = sessionStorage.getItem('exchangeRates');
+    if (exchangeRatesData) {
+      const exchangeRates = JSON.parse(exchangeRatesData);
+      const exchangeRate = exchangeRates[targetCurrency];
+      const displayText = `1 ${baseCurrency} = ${exchangeRate} ${targetCurrency}`;
+      updateDisplay(displayText);
+    } else {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Failed to exchange rates');
+      }
+      const data = await response.json();
+      if (data.result === 'success') {
+        const rates = data.conversion_rates;
+
+        sessionStorage.setItem('exchangeRates', JSON.stringify(rates));
+
+        const exchangeRate = rates[targetCurrency];
+        const displayText = `1 ${baseCurrency} = ${exchangeRate} ${targetCurrency}`;
+        updateDisplay(displayText);
+      } else {
+        throw new Error('No Results Found');
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    updateDisplay('Error');
   }
 }
 
 document.querySelector('form').addEventListener('submit', function (event) {
   event.preventDefault();
-  const baseCurrency = 'USD';
-  const currencyInput = document.getElementById('currency');
-  const currency = currencyInput.value;
-  getCurrency(baseCurrency, currency);
-  currencyInput.value = "";
+  const currencySelect = document.getElementById('currency');
+  const targetCurrency = currencySelect.value;
+  getExchangeRate(baseCurrency, targetCurrency);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const currencySelect = document.getElementById('currency');
+  currencySelect.addEventListener('change', function () {
+    const targetCurrency = currencySelect.value;
+    getExchangeRate(baseCurrency, targetCurrency);
+  });
 });
