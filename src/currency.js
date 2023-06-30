@@ -1,13 +1,16 @@
 export default class Currency {
-  static getCurrency() {
-    const apiKey = process.env.API_KEY;
-    const storedRates = sessionStorage.getItem('exchangeRates');
-    if (storedRates) {
-      return Promise.resolve(JSON.parse(storedRates));
+  static async getCurrency(apiKey) {
+    const response = await fetch(
+      `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`
+    );
+    if (!response.ok) {
+      throw new Error('Failed to get exchange rates, try again');
+    }
+    const data = await response.json();
+    if (data.result === 'success') {
+      return data;
     } else {
-      return fetch(
-        `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`
-      );
+      throw new Error('No results found, try again');
     }
   }
 }
