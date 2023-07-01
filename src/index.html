@@ -8,16 +8,27 @@
 </head>
 
 <body>
-  <form>
-    <input type="number" id="amount" placeholder="Enter Amount">
-    <select id="currency">
-      <option value="USD">USD</option>
-      <option value="EUR">EUR</option>
-    </select>
-    <button type="submit">Convert Currency</button>
-  </form>
-  <div id="showResponse"></div>
-  <p id="display_title"></p>
+  <div class="container">
+    <h1>Aaron's Currency Converter</h1>
+    <form>
+      <input type="number" id="amount" placeholder="Enter Amount">
+      <select id="currency">
+        <option value="USD">USD</option>
+        <option value="AUD">AUD</option>
+        <option value="BGN">BGN</option>
+        <option value="CAD">CAD</option>
+        <option value="CHF">CHF</option>
+        <option value="CNY">CNY</option>
+        <option value="EGP">EGP</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+      </select>
+      <button type="submit">Convert Currency</button>
+    </form>
+    <div id="showResponse">
+      <p id="display_title"></p>
+    </div>
+  </div>
 </body>
 
 </html>
