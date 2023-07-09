@@ -1,8 +1,7 @@
 export default class Currency {
   static async getExchangeRate(baseCurrency, targetCurrency) {
     const apiKey = process.env.API_KEY;
-    const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${baseCurrency}/${targetCurrency}`;
-
+    const url = `https://v6.exchangerate-api.com/v6/${apiKey}1b9cb0c4f0ad0706923dba36/latest/${baseCurrency}USD/${targetCurrency}`;
     const exchangeRatesData = sessionStorage.getItem('exchangeRates');
     let exchangeRates = {};
 
