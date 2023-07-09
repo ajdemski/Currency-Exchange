@@ -34,14 +34,21 @@ Click on "Downloads" and then click on the most recent download "Postman-win64-S
 
 Finish downloading it by choosing a drive to download it to and once its done open it up
 
-# Using Postman In The Browser
+# Using Postman
 
 If you dont want to install Postman click this link to open up their website and sign into your account:
 
 https://www.postman.com/
 
-Next you will want to click on the "+" button:<br>
+For app users or website users you will next want to click on the "+" button (if you dont see it then make a workspace!): 
+
 ![Image](<src/assets/images/Screenshot 2023-07-09 150302.png>)
+
+Next you will want to take your API_KEY example request here:
+
+https://app.exchangerate-api.com/dashboard
+
+and input the example request it into the GET bar in Postman and if it works correctly (Success) then you can move on!
 
 # Setup/Installation Requirements
 
@@ -84,11 +91,14 @@ You wont really have to make a custom api endpoint unless you have more than a f
 
 `const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${baseCurrency}`;`
 
-Once you have completed the above steps you are now ready to move onto the rest of the Setup/Installation Requirements below. If you are having problems with your API_KEY not working please visit the section to download <li><a href='#PostMan'>PostMan</a></li> as it is very important for testing your api and making it work correctly.
+Once you have completed the above steps you are now ready to call the API! If you are having problems with your API_KEY not working please visit the section to download <li><a href='#PostMan'>PostMan</a></li> as it is very important for testing your api and making it work correctly.
 
-* _If you want to see my jest tests you can type "npm run test" in the terminal and it will run the code in the __test__ folder and the javascript code will pass with 100% coverage, try it out!_
-* _Once done with installing and setup you can finally do "npm start" which will start the live server and you can see what my website looks like!_
-* _If you have any problems with this repo please re-visit the previous steps to configure the Setup/Installation Requirements._
+Once done with installing and setup you can finally do "npm start" which will start the live server and you can see what your website looks like!
+
+If you have any problems with this repo please re-visit the previous steps to configure the Setup/Installation Requirements
+
+If you want to see my jest tests you can type "npm run test" in the terminal and it will run the code in the __test__ folder and the javascript code will pass with 100% coverage, try it out!
+
 
 # _Link To Site_
  
