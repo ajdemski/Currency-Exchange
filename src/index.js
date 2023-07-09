@@ -5,14 +5,17 @@ function updateDisplay(displayText) {
   document.getElementById('display_title').textContent = displayText;
 }
 
-const baseCurrency = 'USD';
+const form = document.querySelector('form');
+const amountInput = document.getElementById('amount');
+const CurrencySelect = document.getElementById('currency');
 
 async function getExchangeRate(baseCurrency, targetCurrency) {
   try {
-    const amount = 55;
+    const amount = Number(amountInput.value);
     const exchangeRate = await Currency.getExchangeRate(baseCurrency, targetCurrency);
+    const convertedAmount = amount * exchangeRate;
 
-    const displayText = `${amount} ${baseCurrency} = ${exchangeRate} ${targetCurrency}`;
+    const displayText = `${amount} ${baseCurrency} = ${convertedAmount} ${targetCurrency}`;
     updateDisplay(displayText);
   } catch (error) {
     console.log(error);
@@ -20,17 +23,15 @@ async function getExchangeRate(baseCurrency, targetCurrency) {
   }
 }
 
-document.querySelector('form').addEventListener('submit', function (event) {
+form.addEventListener('submit', function (event) {
   event.preventDefault();
-  const currencySelect = document.getElementById('currency');
-  const targetCurrency = currencySelect.value;
+  const baseCurrency = 'USD';
+  const targetCurrency = CurrencySelect.value;
   getExchangeRate(baseCurrency, targetCurrency);
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  const currencySelect = document.getElementById('currency');
-  currencySelect.addEventListener('change', function () {
-    const targetCurrency = currencySelect.value;
-    getExchangeRate(baseCurrency, targetCurrency);
-  });
+CurrencySelect.addEventListener('change', function () {
+  const baseCurrency = 'USD';
+  const targetCurrency = CurrencySelect.value;
+  getExchangeRate(baseCurrency, targetCurrency);
 });
