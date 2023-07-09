@@ -112,11 +112,11 @@ If you want to see my jest tests you can type "npm run test" in the terminal and
 
 # _Link To Site_
  
-* _https://github.com_
+_https://github.com_
 
 # Known Bugs
 
-* _No Known Bugs_
+_No Known Bugs_
 
 # License
 
