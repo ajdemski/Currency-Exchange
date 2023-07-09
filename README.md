@@ -41,7 +41,7 @@ If you dont want to install Postman click this link to open up their website and
 https://www.postman.com/
 
 Next you will want to click on the "+" button:<br>
-![image]("C:\Users\ajdem\Pictures\Screenshots\Screenshot 2023-07-09 150302.png")
+![image](C:\Users\ajdem\Desktop\PROJECT #6\src\assets\images\Screenshot 2023-07-09 150302.png)
 
 # Setup/Installation Requirements
 
