@@ -52,13 +52,19 @@ and input the example request it into the GET bar in Postman and if it works cor
 
 # Setup/Installation Requirements
 
-* _Clone my repository to your desktop using VsCode._
-* _In the terminal clone the repository with the command: git clone "https://github.com/ajdemski/Project-5"_
-* _Make sure you download the correct Node.js version for this to work!! "https://nodejs.org/en/download"_
-* _Navigate to the directory where you want your cloned project to exist and initialize a new project in the terminal with "npm init"._
-* _Install the used packages with "npm install --dev"._
-* _"npm build" is a script tag written in the package.json run it and it (npm build) to "build a package" so you can run the server._
-* _last but not least... PostMan!_
+Clone my repository to your desktop using VsCode
+
+In the terminal clone the repository with the command: git clone "https://github.com/ajdemski/Project-5
+
+Make sure you download the correct Node.js version for this to work!! "https://nodejs.org/en/download
+
+Navigate to the directory where you want your cloned project to exist and initialize a new project in the terminal with "npm init"
+
+Install the used packages with "npm install --dev"
+
+"npm build" is a script tag written in the package.json run it and it (npm build) to "build a package" so you can run the server
+
+last but not least... PostMan!
 
 To set up your own "apiKey" you will need to input the next steps into the terminal to make a .env file in the root of the directory to correctly hide and protect your API_KEY from being stolen.
 
