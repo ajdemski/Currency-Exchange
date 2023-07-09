@@ -97,7 +97,11 @@ You wont really have to make a custom api endpoint unless you have more than a f
 
 `const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${baseCurrency}`;`
 
-Once you have completed the above steps you are now ready to call the API! If you are having problems with your API_KEY not working please visit the section to download <li><a href='#PostMan'>PostMan</a></li> as it is very important for testing your api and making it work correctly.
+Once you have completed the above steps you are now ready to call the API! If you are having problems with your API_KEY not working please visit the section to download:
+
+<li><a href='#PostMan'>PostMan</a></li> 
+
+It is very important for testing your api and making it work correctly!
 
 Once done with installing and setup you can finally do "npm start" which will start the live server and you can see what your website looks like!
 
